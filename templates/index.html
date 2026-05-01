@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Network Mapping & Enumeration</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -20,22 +24,35 @@
         </header>
 
         <main>
-            <div class="control-panel panel">
-                <div class="panel-header">
-                    <span>TARGET ACQUISITION</span>
-                </div>
-                <div class="panel-body">
-                    <div class="input-group">
-                        <label for="ip-input">TARGET_IP:</label>
-                        <input type="text" id="ip-input" value="127.0.0.1" placeholder="Enter IP address...">
+            <!-- ✅ FORM START -->
+            <form method="POST">
+                <div class="control-panel panel">
+                    <div class="panel-header">
+                        <span>TARGET ACQUISITION</span>
                     </div>
-                    <button id="scan-btn" class="cyber-button">
-                        <span class="btn-text">INITIATE SCAN</span>
-                        <span class="btn-glitch"></span>
-                    </button>
-                </div>
-            </div>
 
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <label for="ip-input">TARGET_IP:</label>
+                            <input 
+                                type="text" 
+                                id="ip-input" 
+                                name="ip" 
+                                value="127.0.0.1" 
+                                placeholder="Enter IP address..." 
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="cyber-button">
+                            <span class="btn-text">INITIATE SCAN</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- ✅ FORM END -->
+
+            <!-- TERMINAL -->
             <div class="terminal-container panel">
                 <div class="panel-header terminal-header">
                     <span>TERMINAL_OUTPUT</span>
@@ -45,17 +62,37 @@
                         <span class="control green"></span>
                     </div>
                 </div>
-                <div class="terminal-body" id="terminal">
-                    <div class="terminal-content" id="output">
-                        <div class="line"><span class="prompt">root@system:~#</span> Ready for target IP...</div>
+
+                <div class="terminal-body">
+                    <div class="terminal-content">
+
+                        <!-- ✅ DYNAMIC OUTPUT -->
+                        {% if ports %}
+                            {% for port in ports %}
+                                <div class="line">
+                                    <span class="prompt">root@system:~#</span>
+                                    <span class="port-open">Port {{ port }} is OPEN</span>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="line">
+                                <span class="prompt">root@system:~#</span>
+                                Ready for target IP...
+                            </div>
+                        {% endif %}
+
                     </div>
+
                     <div class="cursor-line">
-                        <span class="prompt">root@system:~#</span> <span class="blinking-cursor"></span>
+                        <span class="prompt">root@system:~#</span>
+                        <span class="blinking-cursor"></span>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <!-- Optional JS -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
