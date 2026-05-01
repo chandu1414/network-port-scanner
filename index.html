@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Mapping & Enumeration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Net_Map // Enumerator</h1>
+                <div class="status-indicator">
+                    <span class="dot"></span>
+                    <span class="status-text">SYSTEM SECURE</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="control-panel panel">
+                <div class="panel-header">
+                    <span>TARGET ACQUISITION</span>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <label for="ip-input">TARGET_IP:</label>
+                        <input type="text" id="ip-input" value="127.0.0.1" placeholder="Enter IP address...">
+                    </div>
+                    <button id="scan-btn" class="cyber-button">
+                        <span class="btn-text">INITIATE SCAN</span>
+                        <span class="btn-glitch"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="terminal-container panel">
+                <div class="panel-header terminal-header">
+                    <span>TERMINAL_OUTPUT</span>
+                    <div class="window-controls">
+                        <span class="control red"></span>
+                        <span class="control yellow"></span>
+                        <span class="control green"></span>
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminal">
+                    <div class="terminal-content" id="output">
+                        <div class="line"><span class="prompt">root@system:~#</span> Ready for target IP...</div>
+                    </div>
+                    <div class="cursor-line">
+                        <span class="prompt">root@system:~#</span> <span class="blinking-cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
